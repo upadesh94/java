@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 3 - Stack Implementation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .explanation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .program-section {
+            margin-bottom: 2rem;
+        }
+        .program-section h3 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #4338ca;
+        }
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        pre {
+            margin: 0;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Practicals</a>
+        
+        <header>
+            <h1>Practical 3: Stack Implementation</h1>
+            <p>Implementing a Stack with push, pop, and empty check operations</p>
+        </header>
+
+        <div class="explanation">
+            <h2>Problem Statement</h2>
+            <p>Write a class Stack to push number, pop number and to check stack empty or full. (Use OOPs concepts and constructor overloading to assign default size of stack to 5 or user can change the stack size while creating object).</p>
+        </div>
+
+        <div class="program-section">
+            <h3>Solution</h3>
+            <div class="explanation">
+                <p>This program demonstrates:</p>
+                <ul>
+                    <li>Object-Oriented Programming concepts</li>
+                    <li>Stack data structure implementation</li>
+                    <li>Basic stack operations (push, pop, isEmpty)</li>
+                    <li>Stack overflow and underflow handling</li>
+                    <li>Stack content display</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+import java.util.*;
+
+class Stack {
+    int[] stack = new int[5];
+    int top = -1;
+
+    // Push method
+    void push(int x) {
+        if (top == 4) {
+            System.out.println("Stack is full. Cannot push " + x + ".");
+        } else {
+            stack[++top] = x;
+            System.out.println("Pushed " + x + " to the Stack");
+        }
+    }
+
+    // Pop method
+    void pop() {
+        if (top != -1) {
+            System.out.println("Popped " + stack[top] + " from the Stack");
+            stack[top--] = 0;
+        } else {
+            System.out.println("Stack is empty. No item to remove.");
+        }
+    }
+
+    // Check if empty
+    void isEmpty() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+        } else {
+            System.out.println("Stack is not empty");
+        }
+    }
+
+    // Optional: Print stack contents
+    void display() {
+        System.out.print("Current Stack: ");
+        for (int i = 0; i <= top; i++) {
+            System.out.print(stack[i] + " ");
+        }
+        System.out.println();
+    }
+}
+
+public class StackOperation {
+    public static void main(String[] args) {
+        Stack s = new Stack();
+
+        s.isEmpty();      // Check if empty
+
+        // Push elements
+        s.push(1);
+        s.push(2);
+        s.push(3);
+        s.push(4);
+        s.push(5);
+        s.push(6);        // Should show stack full
+
+        s.isEmpty();      // Now should not be empty
+
+        // Pop elements
+        s.pop();
+        s.pop();
+
+        s.isEmpty();      // Should still not be empty
+
+        // Display stack
+        s.display();
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h2>How it works</h2>
+            <ol>
+                <li>The program implements a Stack class with the following features:
+                    <ul>
+                        <li>Fixed-size array to store stack elements</li>
+                        <li>Top pointer to track the current position</li>
+                        <li>Methods for basic stack operations</li>
+                    </ul>
+                </li>
+                <li>Stack Operations:
+                    <ul>
+                        <li><code>push()</code>: Adds an element to the top of the stack</li>
+                        <li><code>pop()</code>: Removes and returns the top element</li>
+                        <li><code>isEmpty()</code>: Checks if the stack is empty</li>
+                        <li><code>display()</code>: Shows current stack contents</li>
+                    </ul>
+                </li>
+                <li>Error Handling:
+                    <ul>
+                        <li>Stack overflow check in push operation</li>
+                        <li>Stack underflow check in pop operation</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="explanation">
+            <h2>Sample Output</h2>
+            <pre>
+Stack is empty
+Pushed 1 to the Stack
+Pushed 2 to the Stack
+Pushed 3 to the Stack
+Pushed 4 to the Stack
+Pushed 5 to the Stack
+Stack is full. Cannot push 6.
+Stack is not empty
+Popped 5 from the Stack
+Popped 4 from the Stack
+Stack is not empty
+Current Stack: 1 2 3
+            </pre>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+    <script>
+        function copyCode(button) {
+            const codeContainer = button.parentElement;
+            const code = codeContainer.querySelector('code').textContent;
+            
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            
+            // Select and copy the text
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary textarea
+            document.body.removeChild(textarea);
+            
+            // Update button text and style
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.textContent = 'Copy Code';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 8 - Exception Handling</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .explanation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .program-section {
+            margin-bottom: 2rem;
+        }
+        .program-section h3 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #4338ca;
+        }
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        pre {
+            margin: 0;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Practicals</a>
+        
+        <header>
+            <h1>Practical 8: Exception Handling</h1>
+            <p>Implementation of Exception Handling in Java with Multiple Examples</p>
+        </header>
+
+        <div class="explanation">
+            <h2>Problem Statement</h2>
+            <p>Implementation of Exception Handling in Java with Multiple Examples demonstrating different types of exceptions and their handling.</p>
+        </div>
+
+        <div class="program-section">
+            <h3>Example 1: Multiple Exception Handling</h3>
+            <div class="explanation">
+                <p>This example demonstrates handling multiple specific exceptions:</p>
+                <ul>
+                    <li>ArithmeticException for division by zero</li>
+                    <li>ArrayIndexOutOfBoundsException for array access</li>
+                    <li>General Exception handling</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+import java.util.*;
+
+public class exceptionex1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[2];
+        try {
+            System.out.println("Enter the two numbers");
+            arr[0] = sc.nextInt();
+            arr[1] = sc.nextInt();
+            int ans = arr[1] / arr[0];
+            System.out.println("Division of two numbers is " + ans);
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index out of bound");
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program-section">
+            <h3>Example 2: Input Mismatch Exception</h3>
+            <div class="explanation">
+                <p>This example demonstrates handling input mismatch exceptions:</p>
+                <ul>
+                    <li>InputMismatchException for invalid input types</li>
+                    <li>Using getMessage() method</li>
+                    <li>Proper resource cleanup with Scanner</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+import java.util.*;
+
+public class exceptionex2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int x, y;
+
+        try {
+            System.out.println("Enter the first number:");
+            x = sc.nextInt();
+            System.out.println("Enter the second number:");
+            y = sc.nextInt();
+            System.out.println("First number is: " + x + " and second number is: " + y);
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input: " + e.getMessage());
+        }
+
+        sc.close();
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program-section">
+            <h3>Example 3: General Exception Handling</h3>
+            <div class="explanation">
+                <p>This example demonstrates handling all exceptions with a single catch block:</p>
+                <ul>
+                    <li>Using general Exception class</li>
+                    <li>Handling multiple types of exceptions</li>
+                    <li>Simple error message display</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+import java.util.*;
+
+public class exceptionex_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[2];
+        try {
+            System.out.println("Enter the two numbers");
+            arr[0] = sc.nextInt();
+            arr[1] = sc.nextInt();
+            int ans = arr[1] / arr[0];
+            System.out.println("Division of two numbers is " + ans);
+        } catch (Exception e) {
+            System.out.println("Any other unexpected exceptions.");
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h2>How it works</h2>
+            <ol>
+                <li>Exception Types:
+                    <ul>
+                        <li>ArithmeticException: Division by zero</li>
+                        <li>ArrayIndexOutOfBoundsException: Invalid array access</li>
+                        <li>InputMismatchException: Invalid input type</li>
+                        <li>General Exception: Catch-all for unexpected errors</li>
+                    </ul>
+                </li>
+                <li>Exception Handling Features:
+                    <ul>
+                        <li>Multiple catch blocks for specific exceptions</li>
+                        <li>Exception message retrieval</li>
+                        <li>Resource cleanup (Scanner)</li>
+                        <li>User-friendly error messages</li>
+                    </ul>
+                </li>
+                <li>Best Practices:
+                    <ul>
+                        <li>Specific exceptions before general ones</li>
+                        <li>Proper resource management</li>
+                        <li>Clear error messages</li>
+                        <li>Graceful error handling</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="explanation">
+            <h2>Sample Outputs</h2>
+            <h3>Example 1:</h3>
+            <pre>
+Enter the two numbers
+10 0
+Cannot divide by zero
+
+Enter the two numbers
+5 10
+Division of two numbers is 2
+            </pre>
+
+            <h3>Example 2:</h3>
+            <pre>
+Enter the first number:
+abc
+Invalid input: null
+
+Enter the first number:
+5
+Enter the second number:
+10
+First number is: 5 and second number is: 10
+            </pre>
+
+            <h3>Example 3:</h3>
+            <pre>
+Enter the two numbers
+10 0
+Any other unexpected exceptions.
+
+Enter the two numbers
+5 10
+Division of two numbers is 2
+            </pre>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+    <script>
+        function copyCode(button) {
+            const codeContainer = button.parentElement;
+            const code = codeContainer.querySelector('code').textContent;
+            
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            
+            // Select and copy the text
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary textarea
+            document.body.removeChild(textarea);
+            
+            // Update button text and style
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.textContent = 'Copy Code';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html> 

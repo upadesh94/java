@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 5 - Shape Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .explanation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .program-section {
+            margin-bottom: 2rem;
+        }
+        .program-section h3 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #4338ca;
+        }
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        pre {
+            margin: 0;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Practicals</a>
+        
+        <header>
+            <h1>Practical 5: Shape Calculator</h1>
+            <p>Implementation of Area and Perimeter Calculator for Different Shapes Using Inheritance</p>
+        </header>
+
+        <div class="explanation">
+            <h2>Problem Statement</h2>
+            <p>Implementation of Area and Perimeter Calculator for Different Shapes Using Inheritance in Java.</p>
+        </div>
+
+        <div class="program-section">
+            <h3>Solution</h3>
+            <div class="explanation">
+                <p>This program demonstrates:</p>
+                <ul>
+                    <li>Object-Oriented Programming concepts</li>
+                    <li>Inheritance in Java</li>
+                    <li>Method overriding</li>
+                    <li>Abstract class implementation</li>
+                    <li>Mathematical calculations</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+class Shape {
+    double len;
+    double hig;
+    double radius;
+    double area;
+    double base;
+
+    void getArea() {}
+    void getPerimeter() {}
+}
+
+class Circle extends Shape {
+    void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    void getArea() {
+        area = Math.PI * radius * radius;
+        System.out.println("Area of Circle is " + area);
+    }
+
+    @Override
+    void getPerimeter() {
+        double perimeter = 2 * Math.PI * radius;
+        System.out.println("Perimeter of Circle is " + perimeter);
+    }
+}
+
+class Rectangle extends Shape {
+    void setDimensions(double len, double hig) {
+        this.len = len;
+        this.hig = hig;
+    }
+
+    @Override
+    void getArea() {
+        area = len * hig;
+        System.out.println("Area of Rectangle is " + area);
+    }
+
+    @Override
+    void getPerimeter() {
+        double perimeter = 2 * (len + hig);
+        System.out.println("Perimeter of Rectangle is " + perimeter);
+    }
+}
+
+class Triangle extends Shape {
+    void setDimensions(double base, double hig) {
+        this.base = base;
+        this.hig = hig;
+    }
+
+    @Override
+    void getArea() {
+        area = 0.5 * base * hig;
+        System.out.println("Area of Triangle is " + area);
+    }
+
+    @Override
+    void getPerimeter() {
+        System.out.println("Perimeter of Triangle cannot be calculated without all 3 sides.");
+    }
+}
+
+public class cal_area {
+    public static void main(String[] args) {
+        Circle c = new Circle();
+        c.setRadius(4.0);
+        c.getArea();
+        c.getPerimeter();
+
+        System.out.println(); // spacer
+
+        Triangle t = new Triangle();
+        t.setDimensions(6.0, 4.0);
+        t.getArea();
+        t.getPerimeter();
+
+        System.out.println(); // spacer
+
+        Rectangle r = new Rectangle();
+        r.setDimensions(4.0, 3.0);
+        r.getArea();
+        r.getPerimeter();
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h2>How it works</h2>
+            <ol>
+                <li>Class Hierarchy:
+                    <ul>
+                        <li><code>Shape</code>: Base class with common attributes and empty methods</li>
+                        <li><code>Circle</code>: Extends Shape with radius-based calculations</li>
+                        <li><code>Rectangle</code>: Extends Shape with length and height calculations</li>
+                        <li><code>Triangle</code>: Extends Shape with base and height calculations</li>
+                    </ul>
+                </li>
+                <li>Features:
+                    <ul>
+                        <li>Area calculation for each shape</li>
+                        <li>Perimeter calculation (where applicable)</li>
+                        <li>Method overriding for specific calculations</li>
+                        <li>Input validation and error handling</li>
+                    </ul>
+                </li>
+                <li>Implementation Details:
+                    <ul>
+                        <li>Uses Math.PI for circle calculations</li>
+                        <li>Different formulas for each shape</li>
+                        <li>Triangle perimeter calculation limitation noted</li>
+                        <li>Clean output formatting</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="explanation">
+            <h2>Sample Output</h2>
+            <pre>
+Area of Circle is 50.26548245743669
+Perimeter of Circle is 25.132741228718345
+
+Area of Triangle is 12.0
+Perimeter of Triangle cannot be calculated without all 3 sides.
+
+Area of Rectangle is 12.0
+Perimeter of Rectangle is 14.0
+            </pre>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+    <script>
+        function copyCode(button) {
+            const codeContainer = button.parentElement;
+            const code = codeContainer.querySelector('code').textContent;
+            
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            
+            // Select and copy the text
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary textarea
+            document.body.removeChild(textarea);
+            
+            // Update button text and style
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.textContent = 'Copy Code';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html> 

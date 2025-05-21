@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 1 - String Operations</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .explanation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .program-section {
+            margin-bottom: 2rem;
+        }
+        .program-section h3 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #4338ca;
+        }
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        pre {
+            margin: 0;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Practicals</a>
+        
+        <header>
+            <h1>Practical 1: String Operations</h1>
+            <p>Implementation of String Operations, Buffer String Operations, and Palindrome String Check</p>
+        </header>
+
+        <div class="explanation">
+            <h2>Problem Statement</h2>
+            <p>Implementation of various string operations in Java including string manipulation, buffer string operations, and palindrome string checking.</p>
+        </div>
+
+        <div class="program-section">
+            <h3>1. Basic String Operations</h3>
+            <div class="explanation">
+                <p>This program demonstrates various operations that can be performed on String objects in Java, including:</p>
+                <ul>
+                    <li>Finding string length</li>
+                    <li>Converting to uppercase and lowercase</li>
+                    <li>Finding index of a substring</li>
+                    <li>Extracting substrings</li>
+                    <li>Checking string containment</li>
+                    <li>String comparison</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+// Assignment 1: Operations on String
+class StringOperation {
+    public static void main(String args[]) {
+        String s1 = "Welcome to MIT";
+        
+        // Length
+        int l = s1.length();
+        System.out.println("Length of the string is: " + l);
+        
+        // Uppercase
+        String s2 = s1.toUpperCase();
+        System.out.println("String in uppercase: " + s2);
+        
+        // Lowercase
+        s2 = s1.toLowerCase();
+        System.out.println("String in lowercase: " + s2);
+
+        // Index of "MIT"
+        int i = s1.indexOf("MIT");
+        System.out.println("Index of 'MIT' in the string is: " + i);
+        
+        // Substring
+        s2 = s1.substring(0, 5);
+        System.out.println("Substring (0 to 5): " + s2);
+
+        // Contains
+        if (s1.contains("MIT")) {
+            System.out.println("String contains 'MIT'");
+        } else {
+            System.out.println("String does not contain 'MIT'");
+        }
+
+        // Equals
+        if (s1.equals("Welcome to MIT")) {
+            System.out.println("String is equal to 'Welcome to MIT'");
+        } else {
+            System.out.println("String is not equal to 'Welcome to MIT'");
+        }
+
+        // Equals Ignore Case
+        if (s1.equalsIgnoreCase("To")) {
+            System.out.println("String is equal to 'To'");
+        } else {
+            System.out.println("String is not equal to 'To'");
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program-section">
+            <h3>2. StringBuffer Operations</h3>
+            <div class="explanation">
+                <p>This program demonstrates operations that can be performed using StringBuffer, which is mutable unlike String:</p>
+                <ul>
+                    <li>Appending text</li>
+                    <li>Inserting text at specific positions</li>
+                    <li>Reversing the string</li>
+                    <li>Deleting portions of the string</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+// Assignment 2: Operations on StringBuffer
+class BufferStringOperation {
+    public static void main(String[] args) {
+        StringBuffer s1 = new StringBuffer("Welcome to MIT");
+
+        // Append
+        s1.append(" college");
+        System.out.println("\nStringBuffer after append operation: " + s1);
+
+        // Insert
+        s1.insert(11, " My");
+        System.out.println("After insert operation: " + s1);
+
+        // Reverse
+        s1.reverse();
+        System.out.println("After reverse operation: " + s1);
+
+        // Delete
+        s1.delete(0, 5);
+        System.out.println("After delete operation: " + s1);
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program-section">
+            <h3>3. Palindrome Check</h3>
+            <div class="explanation">
+                <p>This program demonstrates how to check if a given string is a palindrome (reads the same forwards and backwards):</p>
+                <ul>
+                    <li>Takes user input for a string</li>
+                    <li>Uses StringBuffer to reverse the string</li>
+                    <li>Compares the original and reversed strings</li>
+                    <li>Determines if the string is a palindrome</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+// Assignment 3: Palindrome Check
+import java.util.*;
+
+class Palindrome {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter any string: ");
+        String name = sc.nextLine();
+
+        StringBuffer s1 = new StringBuffer(name);
+        s1.reverse();
+
+        if (name.equals(s1.toString())) {
+            System.out.println("Given string is a palindrome");
+        } else {
+            System.out.println("Given string is not a palindrome");
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+    <script>
+        function copyCode(button) {
+            const codeContainer = button.parentElement;
+            const code = codeContainer.querySelector('code').textContent;
+            
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            
+            // Select and copy the text
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary textarea
+            document.body.removeChild(textarea);
+            
+            // Update button text and style
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.textContent = 'Copy Code';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html> 

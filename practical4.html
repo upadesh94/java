@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 4 - Banking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .explanation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .program-section {
+            margin-bottom: 2rem;
+        }
+        .program-section h3 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #4338ca;
+        }
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        pre {
+            margin: 0;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Practicals</a>
+        
+        <header>
+            <h1>Practical 4: Banking System</h1>
+            <p>Implementation of a Banking System Using Inheritance in Java</p>
+        </header>
+
+        <div class="explanation">
+            <h2>Problem Statement</h2>
+            <p>Implementation of a Banking System Using Inheritance in Java.</p>
+        </div>
+
+        <div class="program-section">
+            <h3>Solution</h3>
+            <div class="explanation">
+                <p>This program demonstrates:</p>
+                <ul>
+                    <li>Object-Oriented Programming concepts</li>
+                    <li>Inheritance in Java</li>
+                    <li>Different types of bank accounts</li>
+                    <li>Basic banking operations</li>
+                    <li>Interest calculation</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+class BankAccount {
+    protected String accountNumber;
+    protected String accountHolderName;
+    protected double balance;
+    protected double interestRate;
+
+    public void setDetails(String accountNumber, String accountHolderName, double balance, double interestRate) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = balance;
+        this.interestRate = interestRate;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount + ", New Balance: " + balance);
+    }
+}
+
+class SavingsAccount extends BankAccount {
+    private double minimumBalance;
+
+    public void setMinimumBalance(double minimumBalance) {
+        this.minimumBalance = minimumBalance;
+    }
+
+    public void withdraw(double amount) {
+        if (balance - amount >= minimumBalance) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount + ", Remaining Balance: " + balance);
+        } else {
+            System.out.println("Error: Insufficient balance to maintain minimum balance.");
+        }
+    }
+}
+
+class FixedDepositAccount extends SavingsAccount {
+    private int term; // in months
+
+    public void setTerm(int term) {
+        this.term = term;
+    }
+
+    public double getInterest() {
+        double interest = (balance * interestRate * term) / 1200;
+        System.out.println("Interest Earned for " + term + " months: " + interest);
+        return interest;
+    }
+}
+
+public class BankSystem {
+    public static void main(String[] args) {
+        // Basic Bank Account
+        BankAccount account1 = new BankAccount();
+        account1.setDetails("101", "Dhiraj Kumar", 10000, 5);
+        account1.deposit(5000);
+
+        System.out.println(); // Spacer
+
+        // Savings Account
+        SavingsAccount savings = new SavingsAccount();
+        savings.setDetails("102", "Ajay Chate", 20000, 4);
+        savings.setMinimumBalance(5000);
+        savings.deposit(3000);
+        savings.withdraw(1000);
+        savings.withdraw(18000); // Should show error due to min balance
+
+        System.out.println(); // Spacer
+
+        // Fixed Deposit Account
+        FixedDepositAccount fixedDeposit = new FixedDepositAccount();
+        fixedDeposit.setDetails("103", "Mayuri Jadhav", 50000, 6);
+        fixedDeposit.setMinimumBalance(5000);
+        fixedDeposit.setTerm(12); // 12 months
+        fixedDeposit.deposit(10000);
+        fixedDeposit.getInterest();
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h2>How it works</h2>
+            <ol>
+                <li>Class Hierarchy:
+                    <ul>
+                        <li><code>BankAccount</code>: Base class with basic account features</li>
+                        <li><code>SavingsAccount</code>: Extends BankAccount with minimum balance feature</li>
+                        <li><code>FixedDepositAccount</code>: Extends SavingsAccount with term and interest calculation</li>
+                    </ul>
+                </li>
+                <li>Features:
+                    <ul>
+                        <li>Account details management</li>
+                        <li>Deposit functionality</li>
+                        <li>Withdrawal with minimum balance check</li>
+                        <li>Interest calculation for fixed deposits</li>
+                    </ul>
+                </li>
+                <li>Inheritance:
+                    <ul>
+                        <li>Protected members in base class for inheritance</li>
+                        <li>Method overriding in derived classes</li>
+                        <li>Additional features in each derived class</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="explanation">
+            <h2>Sample Output</h2>
+            <pre>
+Deposited: 5000.0, New Balance: 15000.0
+
+Deposited: 3000.0, New Balance: 23000.0
+Withdrawn: 1000.0, Remaining Balance: 22000.0
+Error: Insufficient balance to maintain minimum balance.
+
+Deposited: 10000.0, New Balance: 60000.0
+Interest Earned for 12 months: 3600.0
+            </pre>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+    <script>
+        function copyCode(button) {
+            const codeContainer = button.parentElement;
+            const code = codeContainer.querySelector('code').textContent;
+            
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            
+            // Select and copy the text
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary textarea
+            document.body.removeChild(textarea);
+            
+            // Update button text and style
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.textContent = 'Copy Code';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html> 
