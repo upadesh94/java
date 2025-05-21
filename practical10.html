@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 10 - Multithreading</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .explanation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .program-section {
+            margin-bottom: 2rem;
+        }
+        .program-section h3 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #4338ca;
+        }
+        .copy-btn.copied {
+            background: #10b981;
+        }
+        pre {
+            margin: 0;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Practicals</a>
+        
+        <header>
+            <h1>Practical 10: Multithreading</h1>
+            <p>Implementation of Multithreading in Java using Thread Class and Runnable Interface</p>
+        </header>
+
+        <div class="explanation">
+            <h2>Problem Statement</h2>
+            <p>Implementation of multithreading in Java demonstrating the use of both Thread class and Runnable interface to create and manage multiple threads.</p>
+        </div>
+
+        <div class="program-section">
+            <h3>Solution</h3>
+            <div class="explanation">
+                <p>This program demonstrates:</p>
+                <ul>
+                    <li>Thread creation using Thread class</li>
+                    <li>Thread creation using Runnable interface</li>
+                    <li>Thread naming and management</li>
+                    <li>Thread synchronization and sleep</li>
+                    <li>Exception handling in threads</li>
+                </ul>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                <pre><code class="language-java">
+class MyThread extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " - Count: " + i);
+            try {
+                Thread.sleep(500); // Sleep for 500 milliseconds
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+}
+
+class MyRunnable implements Runnable {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " - Count: " + i);
+            try {
+                Thread.sleep(500); // Sleep for 500 milliseconds
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+}
+
+public class Exp_10 {
+    public static void main(String[] args) {
+        // Create and start first thread using Thread class
+        MyThread t1 = new MyThread();
+        t1.setName("Thread-1");
+        t1.start();
+
+        // Create and start second thread using Runnable interface
+        MyRunnable myRunnable = new MyRunnable();
+        Thread t2 = new Thread(myRunnable);
+        t2.setName("Thread-2");
+        t2.start();
+
+        // Main thread execution
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Main Thread - Count: " + i);
+            try {
+                Thread.sleep(500); // Sleep for 500 milliseconds
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h2>How it works</h2>
+            <ol>
+                <li>Thread Creation Methods:
+                    <ul>
+                        <li>Extending Thread class (MyThread)</li>
+                        <li>Implementing Runnable interface (MyRunnable)</li>
+                        <li>Both methods achieve concurrent execution</li>
+                    </ul>
+                </li>
+                <li>Thread Management:
+                    <ul>
+                        <li>Thread naming for identification</li>
+                        <li>Thread sleep for synchronization</li>
+                        <li>Exception handling for interruptions</li>
+                    </ul>
+                </li>
+                <li>Execution Flow:
+                    <ul>
+                        <li>Three threads run concurrently</li>
+                        <li>Each thread counts from 1 to 5</li>
+                        <li>500ms delay between counts</li>
+                        <li>Output shows interleaved execution</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="explanation">
+            <h2>Sample Output</h2>
+            <pre>
+Thread-1 - Count: 1
+Thread-2 - Count: 1
+Main Thread - Count: 1
+Thread-1 - Count: 2
+Thread-2 - Count: 2
+Main Thread - Count: 2
+Thread-1 - Count: 3
+Thread-2 - Count: 3
+Main Thread - Count: 3
+Thread-1 - Count: 4
+Thread-2 - Count: 4
+Main Thread - Count: 4
+Thread-1 - Count: 5
+Thread-2 - Count: 5
+Main Thread - Count: 5
+            </pre>
+            <p>Note: The actual output may vary due to the concurrent nature of threads. The order of execution is not guaranteed.</p>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+    <script>
+        function copyCode(button) {
+            const codeContainer = button.parentElement;
+            const code = codeContainer.querySelector('code').textContent;
+            
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            
+            // Select and copy the text
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary textarea
+            document.body.removeChild(textarea);
+            
+            // Update button text and style
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.textContent = 'Copy Code';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html> 
